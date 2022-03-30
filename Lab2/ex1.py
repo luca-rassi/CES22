@@ -6,7 +6,7 @@ wn.title("Tess becomes a traffic light!")
 wn.bgcolor("lightgreen")
 tess = turtle.Turtle()
 
-pen_size= 3;
+pen_size= 3
 
 def draw_housing():
     # Draw a nice housing to hold the traffic lights
@@ -24,6 +24,8 @@ def draw_housing():
 
 draw_housing()
 
+circle_size = 3
+
 tess.penup()
 # Position tess onto the place where the green light should be
 tess.forward(40)
@@ -31,7 +33,7 @@ tess.left(90)
 tess.forward(50)
 # Turn tess into a big green circle
 tess.shape("circle")
-tess.shapesize(3)
+tess.shapesize(circle_size)
 tess.fillcolor("green")
 # A traffic light is a kind of state machine with three states,
 # Green, Orange, Red. We number these states 0, 1, 2
@@ -69,18 +71,18 @@ def color_blue():
     tess.fillcolor("blue")
 
 
-def plus():
-    global pen_size
-    if(pen_size < 20):
-        pen_size = pen_size + 1
-        tess.shapesize(pen_size)
+def bigger():
+    global circle_size
+    if(circle_size < 4):
+        circle_size = circle_size + 1
+        tess.shapesize(circle_size)
 
 
-def minus():
-    global pen_size
-    if(pen_size > 1):
-        pen_size = pen_size - 1
-        tess.shapesize(pen_size)
+def lower():
+    global circle_size
+    if(circle_size> 1):
+        circle_size = circle_size - 1
+        tess.shapesize(circle_size)
 
 
 def square():
@@ -95,6 +97,30 @@ def triangle():
     tess.shape("triangle")
 
 
+def pen_down():
+    tess.shape('classic')
+    tess.pendown()
+
+
+def pen_up():
+    tess.shape('circle')
+    tess.penup()
+
+
+def plus():
+    global pen_size
+    if(pen_size < 20):
+        pen_size = pen_size + 1
+        tess.shapesize(pen_size)
+
+
+def minus():
+    global pen_size
+    if(pen_size > 1):
+        pen_size = pen_size - 1
+        tess.shapesize(pen_size)
+
+
 def quit():
     wn.bye()
 
@@ -104,12 +130,16 @@ wn.onkey(advance_state_machine, "space")
 wn.onkey(color_red, "r")
 wn.onkey(color_green, "g")
 wn.onkey(color_blue, "b")
-wn.onkey(plus, "plus")
-wn.onkey(minus, "minus")
+wn.onkey(plus,"plus")
+wn.onkey(minus,"minus")
+wn.onkey(bigger, "p")
+wn.onkey(lower, "m")
 wn.onkey(square,"s")
 wn.onkey(quit,"q")
 wn.onkey(circle,"c")
 wn.onkey(triangle,"t")
+wn.onkey(pen_down,"d")
+wn.onkey(pen_up,"u")
 
 wn.listen()  # Listen for events
 wn.mainloop()
